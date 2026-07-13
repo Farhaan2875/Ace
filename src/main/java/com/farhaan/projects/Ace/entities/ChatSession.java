@@ -1,7 +1,6 @@
 package com.farhaan.projects.Ace.entities;
 
 
-import com.farhaan.projects.Ace.enums.ProjectRole;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,18 +11,14 @@ import java.time.Instant;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProjectMember { // Acts as a join table
-    ProjectMemberId projectMemberId; // composite primary key
-
+public class ChatSession {
     Project project;
 
     User user;
 
-    ProjectRole  projectRole;
+    String title;
 
-    Instant invitedAt;
-
-    Instant acceptedAt;
-
-
+    Instant createdAt;
+    Instant updatedAt;
+    Instant deletedAt;
 }

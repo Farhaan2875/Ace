@@ -1,7 +1,7 @@
 package com.farhaan.projects.Ace.entities;
 
 
-import com.farhaan.projects.Ace.enums.ProjectRole;
+import com.farhaan.projects.Ace.enums.PreviewStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,18 +12,23 @@ import java.time.Instant;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProjectMember { // Acts as a join table
-    ProjectMemberId projectMemberId; // composite primary key
-
+public class Preview {
+    Long id;
     Project project;
 
-    User user;
+    String namespace;
 
-    ProjectRole  projectRole;
+    String podName;
 
-    Instant invitedAt;
+    String previewUrl;
 
-    Instant acceptedAt;
+    PreviewStatus status;
+
+    Instant startedAt;
+
+    Instant terminatedAt;
+
+    Instant createdAt;
 
 
 }
