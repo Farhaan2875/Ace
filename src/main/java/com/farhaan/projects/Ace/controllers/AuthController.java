@@ -6,28 +6,28 @@ import com.farhaan.projects.Ace.Dto.auth.SignUpRequest;
 import com.farhaan.projects.Ace.Dto.auth.UserProfileResponse;
 import com.farhaan.projects.Ace.services.AuthService;
 import com.farhaan.projects.Ace.services.UserService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/auth")
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class AuthController {
-    private final AuthService authService;
-    private final UserService userService;
+    AuthService authService;
+    UserService userService;
 
-    @PostMapping("/soignup")
-    public ResponseEntity<AuthResponse> singup(SignUpRequest request) {
+    @PostMapping("/signup")
+    public ResponseEntity<AuthResponse> signup(@RequestBody SignUpRequest request) {
         return ResponseEntity.ok(authService.signup(request));
 
     }
 
     @PostMapping
-    public ResponseEntity<AuthResponse> login(LoginRequest request) {
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
