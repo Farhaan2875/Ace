@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AceApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(AceApplication.class, args);
 	}
 
