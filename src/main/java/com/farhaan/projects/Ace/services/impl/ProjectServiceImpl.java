@@ -30,7 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectSummaryResponse> getUserProjects(Long userId) {
-        return List.of();
+
+        return projectMapper.toProjectSummaryResponse(projectRepository.findAllAccessibleByUser(userId));
     }
 
     @Override
