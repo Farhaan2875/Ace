@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper { // BETTER ALTERNATIVE TO MODEL MAPPER (FASTER AND MORE PRODUCTION READY)
-    // ONE THING TO KEEP IN MIND IS THAT IT ONLY MAPS Fileds with the same name other fields are ignored or you have to use @Mapping with target in that case
+    // ONE THING TO KEEP IN MIND IS THAT IT ONLY MAPS Fileds with the same name other fields are ignored, or you have to use @Mapping with target in that case
 
     ProjectResponse toProjectResponse(Project project); // JUST THIS -> DEFINES THE CODE FOR US
 

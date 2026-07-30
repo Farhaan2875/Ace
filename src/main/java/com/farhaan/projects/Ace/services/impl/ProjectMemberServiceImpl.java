@@ -3,6 +3,7 @@ package com.farhaan.projects.Ace.services.impl;
 import com.farhaan.projects.Ace.Dto.member.InviteMemberRequest;
 import com.farhaan.projects.Ace.Dto.member.MemberResponse;
 import com.farhaan.projects.Ace.Dto.member.UpdateMemberRoleRequest;
+import com.farhaan.projects.Ace.repositories.ProjectMemberRepository;
 import com.farhaan.projects.Ace.repositories.ProjectRepository;
 import com.farhaan.projects.Ace.repositories.UserRepository;
 import com.farhaan.projects.Ace.services.ProjectMemberService;
@@ -16,9 +17,9 @@ import java.util.List;
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-
 public class ProjectMemberServiceImpl implements ProjectMemberService {
 
+    ProjectMemberRepository projectMemberRepository;
 
     @Override
     public MemberResponse deleteProjectMember(Long projectId, Long memberId, Long userId) {
