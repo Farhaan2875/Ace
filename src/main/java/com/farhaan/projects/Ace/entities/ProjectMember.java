@@ -18,7 +18,7 @@ import java.time.Instant;
 @Table(name = "project_members")
 public class ProjectMember { // Acts as a join table
     @EmbeddedId //cant use @Id as we are having composite if
-    ProjectMemberId projectMemberId; // composite primary key
+    ProjectMemberId id; // composite primary key
 
     @ManyToOne
     @MapsId("projectId")
