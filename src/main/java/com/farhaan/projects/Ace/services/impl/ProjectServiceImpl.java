@@ -5,6 +5,7 @@ import com.farhaan.projects.Ace.Dto.project.ProjectResponse;
 import com.farhaan.projects.Ace.Dto.project.ProjectSummaryResponse;
 import com.farhaan.projects.Ace.entities.Project;
 import com.farhaan.projects.Ace.entities.User;
+import com.farhaan.projects.Ace.error.ResourceNotFoundException;
 import com.farhaan.projects.Ace.mapper.ProjectMapper;
 import com.farhaan.projects.Ace.repositories.ProjectRepository;
 import com.farhaan.projects.Ace.repositories.UserRepository;
@@ -78,7 +79,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     // INTERNAL FUNCTIONS FOR REDUNDANT CODE -> making code DRY
-    public Project getAccessibleProjectById(Long id, Long userId) {
-        return projectRepository.findAccessibleProjectById(id,userId).orElseThrow();
+    public Project getAccessibleProjectById(Long projectId, Long userId) {
+        return projectRepository.findAccessibleProjectById(projectId,userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project", projectId.toString()));
     }
 }
