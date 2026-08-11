@@ -33,8 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleMethodArgumentNotValid(MethodArgumentNotValidException ex){
         List<ApiFieldError> errors = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> new ApiFieldError(error.getField(), error.getDefaultMessage())).toList();
-
+                .map(error -> new ApiFieldError(error.getField(), error.getDefaultMessage())).toList(); // a way to simplify
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, "Input Validation Failed", errors);
         log.error(ex.getMessage(), ex);
         return ResponseEntity.status(apiError.status()).body(apiError);

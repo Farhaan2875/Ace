@@ -1,5 +1,6 @@
 package com.farhaan.projects.Ace.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
@@ -9,7 +10,7 @@ public record ApiError (
         HttpStatus status,
         String message,
         Instant timestamp,
-        List<ApiFieldError> errors
+        @JsonInclude(JsonInclude.Include.NON_NULL) List<ApiFieldError> errors // only include this field in JSON response if it is not null
 ) {
     public ApiError(HttpStatus status, String message) {
         this(status, message, Instant.now(), null); //we created a second constructor which calls the main constructor automatically created by record class
