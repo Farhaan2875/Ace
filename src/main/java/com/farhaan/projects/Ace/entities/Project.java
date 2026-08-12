@@ -30,10 +30,6 @@ public class Project {
     @Column(nullable = false)
     String name;
 
-    @ManyToOne // many projects can have one user
-    @JoinColumn(name = "owner_id", nullable = false)
-    User owner;
-
     Boolean isPublic = false;
 
     @CreationTimestamp

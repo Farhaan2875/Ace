@@ -36,9 +36,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Override
     public Void removeProjectMember(Long projectId, Long memberId, Long userId) {
         Project project = getAccessibleProjectById(projectId, userId);
-        if(!project.getOwner().getId().equals(userId)){
-            throw new RuntimeException("not allowed");
-        }
+
         ProjectMemberId projectMemberId = new ProjectMemberId(projectId, memberId);
         if(!projectMemberRepository.existsById(projectMemberId)){
             throw new RuntimeException("Member not found in project");
@@ -50,9 +48,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Override
     public MemberResponse updateMemberRole(Long projectId, Long memberId, UpdateMemberRoleRequest request, Long userId) {
         Project project = getAccessibleProjectById(projectId, userId);
-        if(!project.getOwner().getId().equals(userId)){
-            throw new RuntimeException("not allowed");
-        }
+
 
         ProjectMemberId projectMemberId = new ProjectMemberId(projectId, memberId);
         ProjectMember projectMember = projectMemberRepository.findById(projectMemberId).orElse(null);
@@ -65,9 +61,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Override
     public MemberResponse inviteMember(Long projectId, InviteMemberRequest request, Long userId) {
         Project project = getAccessibleProjectById(projectId, userId);
-        if(!project.getOwner().getId().equals(userId)){
-            throw new RuntimeException("not allowed");
-        }
+
         User invitee = userRepository.findByEmail(request.email()).orElseThrow();
 
         if(invitee.getId().equals(userId)){
@@ -93,17 +87,10 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     @Override
     public List<MemberResponse> getProjectMembers(Long projectId, Long userId) {
         Project project = getAccessibleProjectById(projectId, userId);
-        List<MemberResponse> memberResponseList = new ArrayList<>();
-        // owner is a member
-        memberResponseList.add(projectMemberMapper.toProjectMemberResponseFromOwner(project.getOwner()));
-
-        memberResponseList.addAll(
-                projectMemberRepository.findByIdProjectId(projectId)
-                        .stream()
-                        .map(projectMemberMapper::toProjectMemberResponseFromMember)
-                        .toList()
-        );
-        return memberResponseList;
+        return projectMemberRepository.findByIdProjectId(projectId)
+                .stream()
+                .map(projectMemberMapper::toProjectMemberResponseFromMember)
+                .toList();
     }
 
     // INTERNAL FUNCTIONS FOR REDUNDANT CODE -> making code DRY
